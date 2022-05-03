@@ -398,7 +398,7 @@ class Translator(object):
             log_probs = self.model.generator(dec_out.squeeze(0))
             # log_probs = 0.5*self.model.generator(dec_ref.squeeze(0)) + 0.5*log_probs
             if self.refer:
-                max_features = torch.tensor(torch.exp(log_probs))
+                max_features = torch.exp(log_probs).clone().detach()
                 lambs = 3
                 for i in range(0,self.refer):
                     max_features += lambs*ref_prs[i].float()*torch.exp(self.model.generator(dec_ref_list[i].squeeze(0)))
@@ -593,7 +593,7 @@ class Translator(object):
             topk_log_probs = topk_scores * length_penalty
 
             # Resolve beam origin and true word ids.
-            topk_beam_index = topk_ids.div(vocab_size)
+            topk_beam_index = torch.div(topk_ids, vocab_size, rounding_mode='floor')
             topk_ids = topk_ids.fmod(vocab_size)
 
             # topk_ids = torch.cat([batch.tgt[step + 1][batch_offset].view(-1, 1), topk_ids], -1)[:, :self.beam_size]

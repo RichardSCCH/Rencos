@@ -1,1 +1,4 @@
-__author__ = 'tylin'
+__author__ = 'wasi'
+
+from bleu import *
+from .bleu_scorer import *

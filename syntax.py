@@ -30,8 +30,8 @@ def build_index(file_dir):
     # t2.setTokenized(True)
     # t2.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS)
 
-    print("%d docs in index" % writer.numDocs())
-    if writer.numDocs():
+    print("%d docs in index" % writer.getDocStats().numDocs)
+    if writer.getDocStats().numDocs:
         print("Index already built.")
         return
     with open(file_dir+"/train/train.ast.src") as fc:
@@ -45,7 +45,7 @@ def build_index(file_dir):
 
         writer.addDocument(doc)
 
-    print("Closing index of %d docs..." % writer.numDocs())
+    print("Closing index of %d docs..." % writer.getDocStats().numDocs)
     writer.close()
 
 
