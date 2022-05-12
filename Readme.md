@@ -1,3 +1,6 @@
+## docker
+```nvidia-docker run -it --rm --runtime=nvidia -e NVIDIA_VISIBLE_DEVICES=2,3 --name rencos --mount type=bind,source="$(pwd)"/samples,target=/usr/src/app/samples rencos```
+
 # Retrieval-based Neural Source Code Summarization
 This project mainly includes source ode, experimental data and results of our paper entitled "Retrieval-based Neural Source Code Summarization" that has been published at ICSE'2020. Instead of only relying on a single encoder-decoder model, our proposed approach Rencos can take advantages of both neural and retrieval-based techniques by enhancing it with retrieved similar code snippets from the aspects of syntax and semantics though our fusion model. The results on the source code summarization task show that it can effectively deal with low-frequency problem in NMT-based approach and thus improve the performance.
 
